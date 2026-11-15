@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contoh Responsive Navigation</title>
+  <style>
+    :root {
+      --ink: #0f172a;
+      --text: #334155;
+      --muted: #64748b;
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --line: #e2e8f0;
+      --brand: #2563eb;
+      --accent: #fbbf24;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background-color: var(--bg);
+      line-height: 1.65;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0 0 4px;
+      font-size: 28px;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+
+    .subtitle {
+      margin: 0;
+      font-size: 15px;
+      color: var(--muted);
+    }
+
+    /* Desktop */
+    .layout {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Horizontal */
+    nav ul {
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
+      margin: 0;
+      padding: 6px;
+      list-style: none;
+      background-color: var(--brand);
+      border-radius: 12px;
+      box-shadow: 0 6px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    nav a {
+      display: block;
+      padding: 10px 20px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.2s;
+    }
+
+    nav a:hover {
+      background-color: rgba(255, 255, 255, 0.16);
+    }
+
+    nav a:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: -2px;
+    }
+
+    nav a[aria-current="page"] {
+      background-color: rgba(255, 255, 255, 0.18);
+      box-shadow: inset 0 -3px 0 var(--accent);
+    }
+
+    /* Konten */
+    .panel {
+      padding: 28px;
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+    }
+
+    h2 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      color: var(--ink);
+    }
+
+    h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    p {
+      margin: 0;
+      font-size: 15px;
+      max-width: 70ch;
+    }
+
+    code {
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    /* Mode */
+    .mode {
+      display: none;
+      margin-top: 16px;
+      padding: 6px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1e40af;
+      background-color: #dbeafe;
+      border-radius: 999px;
+    }
+
+    .mode-desktop {
+      display: inline-block;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .compare .panel {
+      padding: 20px;
+    }
+
+    .compare p {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .wire {
+      display: flex;
+      gap: 6px;
+      height: 100px;
+      padding: 8px;
+      background-color: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+
+    .wire-nav {
+      display: flex;
+      gap: 3px;
+      padding: 4px;
+      background-color: var(--brand);
+      border-radius: 4px;
+    }
+
+    .wire-nav span {
+      background-color: rgba(255, 255, 255, 0.75);
+      border-radius: 2px;
+    }
+
+    .wire-body {
+      flex: 1;
+      background-color: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+    }
+
+    /* menu di atas */
+    .wire-top {
+      flex-direction: column;
+    }
+
+    .wire-top .wire-nav {
+      flex-direction: row;
+      height: 18px;
+    }
+
+    .wire-top .wire-nav span {
+      width: 22px;
+    }
+
+    /* menu di kiri */
+    .wire-left {
+      flex-direction: row;
+    }
+
+    .wire-left .wire-nav {
+      flex-direction: column;
+      width: 36px;
+    }
+
+    .wire-left .wire-nav span {
+      height: 8px;
+    }
+
+    .wire-slim .wire-nav {
+      width: 24px;
+    }
+
+    footer {
+      margin-top: 24px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      nav a {
+        transition: none;
+      }
+    }
+
+    /* Tablet dan smartphone */
+    @media (max-width: 900px) {
+      .layout {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      nav {
+        flex: 0 0 200px;
+        position: sticky;
+        top: 16px;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      nav a {
+        padding: 13px 16px;
+      }
+
+      /* Menu aktif */
+      nav a[aria-current="page"] {
+        box-shadow: inset 4px 0 0 var(--accent);
+      }
+
+      .compare {
+        grid-template-columns: 1fr;
+      }
+
+      .mode-desktop {
+        display: none;
+      }
+
+      .mode-tablet {
+        display: inline-block;
+      }
+    }
+
+    /* Smartphone */
+    @media (max-width: 600px) {
+      .page {
+        padding: 20px 16px 36px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .layout {
+        gap: 12px;
+      }
+
+      nav {
+        flex-basis: 112px;
+        top: 12px;
+      }
+
+      nav a {
+        padding: 12px 12px;
+        font-size: 14px;
+      }
+
+      .panel {
+        padding: 16px;
+      }
+
+      .mode-tablet {
+        display: none;
+      }
+
+      .mode-smartphone {
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <h1>Contoh Responsive Navigation</h1>
+      <p class="subtitle">Tugas Praktikum 2: CSS Flexbox dan Media Query</p>
+    </header>
+
+    <div class="layout">
+      <nav aria-label="Menu utama">
+        <ul>
+          <li><a href="#" aria-current="page">Beranda</a></li>
+          <li><a href="#">Profil</a></li>
+          <li><a href="#">Layanan</a></li>
+          <li><a href="#">Kontak</a></li>
+        </ul>
+      </nav>
+
+      <main>
+        <section class="panel">
+          <h2>Selamat Datang</h2>
+          <p>
+            Ini adalah contoh menu navigasi responsif menggunakan CSS Flexbox
+            dan Media Query. Pada desktop, menu tersusun secara horizontal di
+            bagian atas. Ketika dibuka pada tablet dan smartphone, menu berubah
+            menjadi susunan vertikal di samping kiri.
+          </p>
+          <span class="mode mode-desktop">Tampilan saat ini: desktop</span>
+          <span class="mode mode-tablet">Tampilan saat ini: tablet</span>
+          <span class="mode mode-smartphone">Tampilan saat ini: smartphone</span>
+        </section>
+
+        <div class="compare">
+          <section class="panel">
+            <h3>Desktop</h3>
+            <p>Lebar layar di atas 900px. Menu horizontal di atas dengan <code>flex-direction: row</code>.</p>
+            <div class="wire wire-top" aria-hidden="true">
+              <div class="wire-nav"><span></span><span></span><span></span><span></span></div>
+              <div class="wire-body"></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Tablet</h3>
+            <p>Lebar layar 601px sampai 900px. Menu vertikal di samping kiri dengan <code>flex-direction: column</code>.</p>
+            <div class="wire wire-left" aria-hidden="true">
+              <div class="wire-nav"><span></span><span></span><span></span><span></span></div>
+              <div class="wire-body"></div>
+            </div>
+          </section>
+
+          <section class="panel">
+            <h3>Smartphone</h3>
+            <p>Lebar layar maksimal 600px. Menu tetap vertikal di samping kiri dengan lebar yang lebih ramping.</p>
+            <div class="wire wire-left wire-slim" aria-hidden="true">
+              <div class="wire-nav"><span></span><span></span><span></span><span></span></div>
+              <div class="wire-body"></div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <footer>Ubah ukuran jendela browser untuk melihat perubahan menu.</footer>
+  </div>
+</body>
+</html>
